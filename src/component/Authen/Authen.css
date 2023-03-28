@@ -1,0 +1,20 @@
+.login-form {
+    text-align: left;
+    margin-top: 20px;
+    float: center;
+}
+
+.login-footer {
+    text-align: right;
+    width: 90%;
+    margin-top: 20px;
+}
+
+.check-data {
+    display: none;
+}
+
+.active {
+    display: block !important;
+}
+
