@@ -6,7 +6,8 @@ import { APP_API_URL, downloadFile } from "../../constant";
 import axios from "axios";
 import "./Home.css";
 
-function Home() {
+function Home(props) {
+  const {userId} = props
   const navigate = useNavigate();
   const redirectPage = () => {
     navigate("/upload");
@@ -49,7 +50,7 @@ function Home() {
       // Search document follow attribute
       const response = await axios({
         method: "get",
-        url: `${APP_API_URL}/docs/search`,
+        url: `${APP_API_URL}/docs/${userId}/search`,
         params: params,
       });
       console.log("Search successful: ", response);

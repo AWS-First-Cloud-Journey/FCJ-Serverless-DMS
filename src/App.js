@@ -111,7 +111,7 @@ function App() {
           </div>
           <div className="col-content">
             <Routes>
-              <Route exact path="/"         element={<Home />}></Route>
+              <Route exact path="/"         element={<Home userId={currentUser.id}/>}></Route>
               <Route exact path="/upload"   element={<Upload user={currentUser} />}></Route>
               <Route exact path="/profile"  element={<MyProfile user={currentUser} />}></Route>
               <Route exact path="/logout"   element={<Logout setCheckAuthen={setCheckAuthen} />}></Route>
