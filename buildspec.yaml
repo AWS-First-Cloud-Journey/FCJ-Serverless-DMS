@@ -34,7 +34,7 @@ phases:
       #- aws configure set default.region $AWS_REGION
       - chmod +x amplify_init.sh
       - ./amplify_init.sh
-      - amplifyPush --simple
+      - amplify push
   build:
     commands:
       # run build script
