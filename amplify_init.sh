@@ -6,6 +6,7 @@ IFS='|'
 AUTHCONFIG="{\
 \"userPoolId\": \"ap-southeast-1_ClqyVYv6m\",\
 \"webClientId\": \"4rt2l9rmqe24vb79pupblc30o0\",\
+\"nativeClientId\": \"4rt2l9rmqe24vb79pupblc30o0\",\
 \"identityPoolId\": \"ap-southeast-1:507b214d-b57c-455b-b627-fe2bddee56f3\"\
 }"
 
