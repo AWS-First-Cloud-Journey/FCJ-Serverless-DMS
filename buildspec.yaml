@@ -13,6 +13,7 @@ phases:
       # so that build commands work
       - yarn add eslint-config-react-app
       # install amplify
+      - npm install -g @aws-amplify/cli
   pre_build:
     commands:
       - amplify init --yes
