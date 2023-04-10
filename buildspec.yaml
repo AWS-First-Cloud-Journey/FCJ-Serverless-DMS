@@ -5,19 +5,17 @@ phases:
     runtime-versions:
       nodejs: latest
 
-    pre_build:
-      commands:
-        # install yarn
-        - npm install yarn
-        # install dependencies
-        - yarn
-        # so that build commands work
-        - yarn add eslint-config-react-app
-        # install amplify
-        - npm install -g @aws-amplify/cli
-        - amplify init --yes 
-        - amplify push --yes
-
+    commands:
+      # install yarn
+      - npm install yarn
+      # install dependencies
+      - yarn
+      # so that build commands work
+      - yarn add eslint-config-react-app
+      # install amplify
+  pre_build:
+    commands:
+      - amplify init --yes
   build:
     commands:
       # run build script
