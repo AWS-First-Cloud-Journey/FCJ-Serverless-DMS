@@ -14,6 +14,7 @@ phases:
       - yarn add eslint-config-react-app
       # install amplify
       - npm install -g @aws-amplify/cli
+      - curl -qL -o jq https://stedolan.github.io/jq/download/linux64/jq && chmod +x ./jq
   pre_build:
     commands:
       - ls
