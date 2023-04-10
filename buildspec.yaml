@@ -14,11 +14,6 @@ phases:
       - yarn add eslint-config-react-app
       # install amplify
       - npm install -g @aws-amplify/cli
-  pre_build:
-    commands:
-      - ls
-      - chmod +x amplify_init.sh
-      - ./amplify_init.sh
   build:
     commands:
       # run build script
