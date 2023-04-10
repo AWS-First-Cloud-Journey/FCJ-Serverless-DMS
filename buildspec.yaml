@@ -16,6 +16,7 @@ phases:
       - npm install -g @aws-amplify/cli
   pre_build:
     commands:
+      - ls
       - ./amplify_init.sh
   build:
     commands:
