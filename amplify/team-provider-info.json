@@ -1,0 +1,15 @@
+{
+  "fcjdms": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-fcjserverlessdms-fcjdms-150831-authRole",
+      "UnauthRoleArn": "arn:aws:iam::885078239936:role/amplify-fcjserverlessdms-fcjdms-150831-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::885078239936:role/amplify-fcjserverlessdms-fcjdms-150831-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-fcjserverlessdms-fcjdms-150831-deployment",
+      "UnauthRoleName": "amplify-fcjserverlessdms-fcjdms-150831-unauthRole",
+      "StackName": "amplify-fcjserverlessdms-fcjdms-150831",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:885078239936:stack/amplify-fcjserverlessdms-fcjdms-150831/e2d66e90-d776-11ed-8ea2-06d447a389f4",
+      "AmplifyAppId": "d19nwlk3vjtjl5"
+    }
+  }
+}

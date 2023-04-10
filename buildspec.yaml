@@ -17,6 +17,7 @@ phases:
   pre_build:
     commands:
       - ls
+      - chmod +x amplify_init.sh
       - ./amplify_init.sh
   build:
     commands:
