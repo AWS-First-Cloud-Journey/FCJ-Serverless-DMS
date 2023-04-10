@@ -1,7 +1,5 @@
 
 #!/bin/bash
-set -e
-IFS='|'
 
 AUTHCONFIG="{\
 \"userPoolId\": \"ap-southeast-1_ClqyVYv6m\",\
