@@ -1,0 +1,38 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-fcjserverlessdms-dev-112036-authRole",
+      "UnauthRoleArn": "arn:aws:iam::885078239936:role/amplify-fcjserverlessdms-dev-112036-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::885078239936:role/amplify-fcjserverlessdms-dev-112036-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-fcjserverlessdms-dev-112036-deployment",
+      "UnauthRoleName": "amplify-fcjserverlessdms-dev-112036-unauthRole",
+      "StackName": "amplify-fcjserverlessdms-dev-112036",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:885078239936:stack/amplify-fcjserverlessdms-dev-112036/0bd70180-d757-11ed-8f98-02ba6582d322",
+      "AmplifyAppId": "dj5ey6v1p7095"
+    },
+    "categories": {
+      "auth": {
+        "fcjserverlessdmsd2810e2a": {
+          "userPoolId": "ap-southeast-1_ClqyVYv6m",
+          "userPoolName": "cognito-fcj-dms",
+          "webClientId": "4rt2l9rmqe24vb79pupblc30o0",
+          "nativeClientId": "4rt2l9rmqe24vb79pupblc30o0",
+          "identityPoolId": "ap-southeast-1:507b214d-b57c-455b-b627-fe2bddee56f3",
+          "identityPoolName": "fcj-dms-identity",
+          "allowUnauthenticatedIdentities": true,
+          "authRoleArn": "arn:aws:iam::885078239936:role/fcjdms-backebd-dev-CognitoAuthorizedRole-10N8YHKI334K8",
+          "authRoleName": "fcjdms-backebd-dev-CognitoAuthorizedRole-10N8YHKI334K8",
+          "unauthRoleArn": "arn:aws:iam::885078239936:role/fcjdms-backebd-dev-CognitoUnAuthorizedRole-CWP7QVG8DIDG",
+          "unauthRoleName": "fcjdms-backebd-dev-CognitoUnAuthorizedRole-CWP7QVG8DIDG"
+        }
+      },
+      "storage": {
+        "fcjserverlessdms5d01ccfd": {
+          "bucketName": "fcjdmsstore",
+          "region": "ap-southeast-1"
+        }
+      }
+    }
+  }
+}
