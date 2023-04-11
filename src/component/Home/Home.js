@@ -140,7 +140,7 @@ function Home(props) {
             <div className="row table-title text-normal text-black pt-70 pb-70">
               <div className="col-3">Title</div>
               <div className="col-2 bleft">Modified</div>
-              <div className="col-2 bleft">Add by</div>
+              <div className="col-2 bleft">Type</div>
               <div className="col-1 bleft">Size</div>
               <div className="col bleft">Tag</div>
             </div>
