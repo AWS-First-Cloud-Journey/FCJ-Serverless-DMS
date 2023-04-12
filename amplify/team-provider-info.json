@@ -12,12 +12,6 @@
       "AmplifyAppId": "d3iou65vojw61c"
     },
     "categories": {
-      "storage": {
-        "fcjserverlessdms3cd3babb": {
-          "bucketName": "fcjdmsstore",
-          "region": "ap-southeast-1"
-        }
-      },
       "auth": {
         "fcjserverlessdms4da76f2c": {
           "userPoolId": "ap-southeast-1_ClqyVYv6m",
