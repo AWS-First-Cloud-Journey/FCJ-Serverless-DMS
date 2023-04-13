@@ -19,23 +19,23 @@ function Menu(props) {
       </span>
       <div className="menu text-normal" onClick={closeMenu}>
         <NavLink className="menu-item" activeclassname="active" to="/">
-          <i className="fa fa-home icon-sm" aria-hidden="true"></i>
-          &nbsp;&nbsp;&nbsp;
+          <i className="fa fa-home icon-sm" aria-hidden="true" style={{ width: "15%", textAlign: "center" }}></i>
+          &nbsp;&nbsp;
           <span>Home</span>
         </NavLink>
         <NavLink className="menu-item" to="/profile">
-          <i className="fa-solid fa-user icon-sm"></i>
-          &nbsp;&nbsp;&nbsp;
+          <i className="fa-solid fa-user icon-sm"  style={{ width: "15%", textAlign: "center"}}></i>
+          &nbsp;&nbsp;
           <span>My Profile</span>
         </NavLink>
         <NavLink className="menu-item" to="/document">
-          <i className="fa-solid fa-file-lines icon-sm"></i>
-          &nbsp;&nbsp;&nbsp;
+          <i className="fa-solid fa-file-lines icon-sm" style={{ width: "15%" , textAlign: "center"}}></i>
+          &nbsp;&nbsp;
           <span>My Document</span>
         </NavLink>
         <NavLink className="menu-footer text-normal text-black" to="/logout">
-          <i className="fa-solid fa-right-from-bracket"></i>
-          &nbsp;&nbsp;&nbsp;
+          <i className="fa-solid fa-right-from-bracket" style={{ width: "15%" , textAlign: "center"}}></i>
+          &nbsp;&nbsp;
           <span>Logout</span>
         </NavLink>
       </div>

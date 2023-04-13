@@ -19,7 +19,7 @@
   top: 50%;
   /* left: 50%; */
   color: #7a7a7a;
-  padding-left: 10%;
+  padding-left: 5%;
   text-decoration: none;
 }
 
@@ -39,7 +39,7 @@
   display: -webkit-flex;
   display: flex;
   align-items: center;
-  padding-left: 10%;
+  padding-left: 5%;
   text-decoration: none;
 }
 
