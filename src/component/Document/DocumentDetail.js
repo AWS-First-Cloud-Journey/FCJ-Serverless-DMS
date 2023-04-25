@@ -1,15 +1,22 @@
 import React, { useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { APP_API_URL, downloadFile } from "../../constant";
 import axios from "axios";
+import { filesize } from "filesize";
 
 import "../Profile/MyProfile.css";
 
 function DocumentDetail(props) {
   const location = useLocation();
   const docItem = location.state;
+  const navigate = useNavigate();
   const { username } = props;
+
+  const backPage = () => {
+    navigate("/document");
+  };
 
   return (
     <div className="upload-body">
@@ -45,7 +52,7 @@ function DocumentDetail(props) {
             <div className="infor-item">
               <label className="text-normal text-line text-black">Size</label>
               <br />
-              <span className="text-normal text-line">{docItem.size}</span>
+              <span className="text-normal text-line">{filesize(docItem.size, { base: 1, standard: "jedec" })}</span>
             </div>
             <div className="infor-item">
               <label className="text-normal text-line text-black">Type</label>
@@ -55,7 +62,7 @@ function DocumentDetail(props) {
               </span>
             </div>
           </div>
-          <div className="col-50" style={{ paddingLeft: "20px" }}>
+          <div className="col-50" style={{ paddingLeft: "2%" }}>
             <div className="infor-item">
               <label className="text-normal text-line text-black">Tag</label>
               <br />
@@ -65,6 +72,15 @@ function DocumentDetail(props) {
             </div>
           </div>
         </div>
+      </div>
+      <div className="content-footer">
+        <button
+          type="button"
+          className="btn btn-cancel text-normal"
+          onClick={backPage}
+        >
+          Cancel
+        </button>
       </div>
     </div>
   );

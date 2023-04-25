@@ -136,6 +136,10 @@ input[type="radio"]:checked:before {
   color: rgb(206, 195, 0);
 }
 
+.text-gray {
+  color: #7a7a7a;
+}
+
 .pb-70,
 .py-70 {
   padding-bottom: 0.3rem !important;
@@ -163,12 +167,16 @@ input[type="radio"]:checked:before {
 }
 
 .content-body {
-  height: 80vh;
+  height: 83vh;
   color: #7a7a7a;
   background: #ffffff;
   padding: 20px 20px 0px 20px;
   text-align: right;
   /* overflow-y: auto; */
+}
+
+.mod-delete {
+  text-align: right;
 }
 
 .content-footer {
@@ -179,7 +187,7 @@ input[type="radio"]:checked:before {
 }
 
 .profile-detail {
-  height: 100%;
+  height: 65vh;
   display: flex;
   padding-top: 30px;
 }
@@ -220,10 +228,32 @@ input[type="radio"]:checked:before {
 .document-table {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
-  padding-left: calc(var(--bs-gutter-x) * 0.5);
-  padding-right: calc(var(--bs-gutter-x) * 0.5);
   overflow-y: auto;
-  height: 70vh;
+  max-height: 65vh;
+}
+
+.row-custome {
+  display: flex;
+  flex-wrap: wrap;
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+}
+
+.row-custome > * {
+  max-width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.3);
+  padding-left: calc(var(--bs-gutter-x) * 0.3);
+  margin-top: var(--bs-gutter-y);
+}
+
+.down-icon {
+  font-size: 24px;
+  color: #F6F6F6;
+  text-align: center;
+}
+
+.down-icon:nth-child(odd) {
+  color: #a8a8a8
 }
 
 @media screen and (max-width: 768px) {
@@ -278,6 +308,19 @@ input[type="radio"]:checked:before {
   .col-menu.is-active {
     left: 0;
   }
+
+  .content-body {
+    padding: 10px 10px 0px 10px;
+  }
+
+  .down-icon {
+    font-size: 12px;
+  }
+
+  .row-custome > * {
+    padding-right: calc(var(--bs-gutter-x) * 0.1);
+    padding-left: calc(var(--bs-gutter-x) * 0.1);
+  }
 }
 @media only screen and (min-width: 768px) and (max-width: 992px) {
   .icon-sm {
@@ -305,7 +348,9 @@ input[type="radio"]:checked:before {
     width: 12px;
     height: 12px;
   }
-
+  .down-icon {
+    font-size: 16px;
+  }
 }
 
 @media only screen and (min-device-width: 992px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
@@ -333,6 +378,9 @@ input[type="radio"]:checked:before {
   input[type="radio"] {
     width: 14px;
     height: 14px;
+  }
+  .down-icon {
+    font-size: 18px;
   }
 }
 

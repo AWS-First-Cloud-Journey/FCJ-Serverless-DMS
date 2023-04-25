@@ -26,7 +26,10 @@ function App() {
   // to check close or open menu
   const [isCheckMenuItem, setIsCheckMenuItem] = useState(false);
 
-  const [session, setSession] = useState("");
+  const [genInfor, setGenInfor] = useState({
+    size: 0,
+    amount: 0
+  });
   const [currentUser, setCurrentUser] = useState();
   const [checkAuthen, setCheckAuthen] = useState(false);
 
@@ -89,7 +92,7 @@ function App() {
         <Router>
           <Routes>
             <Route exact path="/" element={<Start />}></Route>
-            <Route exact path="/signin" element={<Login setCheckAuthen={setCheckAuthen} setCurrentUser={setCurrentUser} />}
+            <Route exact path="/signin" element={<Login setCheckAuthen={setCheckAuthen} setCurrentUser={setCurrentUser}/>}
             ></Route>
             <Route exact path="/signup" element={<Register />}></Route>
           </Routes>
@@ -111,12 +114,12 @@ function App() {
           </div>
           <div className="col-content">
             <Routes>
-              <Route exact path="/"         element={<Home userId={currentUser.id}/>}></Route>
-              <Route exact path="/upload"   element={<Upload user={currentUser} />}></Route>
-              <Route exact path="/profile"  element={<MyProfile user={currentUser} />}></Route>
+              <Route exact path="/"         element={<Home user={currentUser} setGenInfor={setGenInfor} genInfor={genInfor}/>}></Route>
+              <Route exact path="/upload"   element={<Upload user={currentUser} genInfor={genInfor} setGenInfor={setGenInfor}/>}></Route>
+              <Route exact path="/profile"  element={<MyProfile user={currentUser} genInfor={genInfor}/>}></Route>
               <Route exact path="/logout"   element={<Logout setCheckAuthen={setCheckAuthen} />}></Route>
               <Route exact path="/profile/update" element={<UpdateProfile />}></Route>
-              <Route exact path="/document" element={<Document user={currentUser}/>}></Route>
+              <Route exact path="/document" element={<Document user={currentUser} genInfor={genInfor} setGenInfor={setGenInfor}/>}></Route>
               <Route
                 exact
                 path="/document/detail/:name"

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
+import { filesize } from "filesize";
 import "./MyProfile.css";
 
 function MyProfile(props) {
+  const {genInfor} = props
   const [myProfile, setMyProfile] = React.useState({});
   const navigate = useNavigate();
   const redirectPage = () => {
@@ -12,7 +14,7 @@ function MyProfile(props) {
 
   useEffect(() => {
     Auth.currentAuthenticatedUser().then((session) => {
-      // console.log(session);
+      console.log(session);
       setMyProfile({
         id: session.attributes["sub"],
         name: session.username,
@@ -70,22 +72,22 @@ function MyProfile(props) {
             </div>
             <div className="infor-item">
               <label className="text-normal text-line text-black">
-                User pool ID
+                Used Storage
               </label>
               <br />
               <span className="text-normal text-line">
-                {myProfile.pool_id}
+              {filesize(genInfor.size, { base: 1, standard: "jedec" })}
               </span>
             </div>
             <div className="infor-item">
               <label className="text-normal text-line text-black">
-                MFA setting
+                Amount of Files
               </label>
               <br />
-              <span className="text-normal text-line">{myProfile.mfa}</span>
+              <span className="text-normal text-line">{genInfor.amount > 0 ? genInfor.amount + " files" : 0 + " file"}</span>
             </div>
           </div>
-          <div className="col-50" style={{ paddingLeft: "20px" }}>
+          <div className="col-50" style={{ paddingLeft: "2%" }}>
             <div className="infor-item">
               <label className="text-normal text-line text-black">
                 MFA methods

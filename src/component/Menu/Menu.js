@@ -36,7 +36,7 @@ function Menu(props) {
         <NavLink className="menu-footer text-normal text-black" to="/logout">
           <i className="fa-solid fa-right-from-bracket" style={{ width: "15%" , textAlign: "center"}}></i>
           &nbsp;&nbsp;
-          <span>Logout</span>
+          <span>Sign out</span>
         </NavLink>
       </div>
     </div>

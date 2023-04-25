@@ -4,66 +4,39 @@ import { NavLink, Link } from "react-router-dom";
 import { Storage } from "aws-amplify";
 import { APP_API_URL, downloadFile } from "../../constant";
 import axios from "axios";
+import { filesize } from "filesize";
 import "./Home.css";
 
 function Home(props) {
-  const {userId} = props
+  const { user, setGenInfor, genInfor } = props;
+  const welcome = useRef(null);
+  const searchEl = useRef(null);
   const navigate = useNavigate();
+
   const redirectPage = () => {
     navigate("/upload");
   };
-  const fieldTrans = {
-    name: "file.S",
-    tag: "tag.S",
-    type: "type.S",
-  };
-  const [keyword, setKeyword] = useState("");
-  const [attribute, setAttribute] = useState("name");
-  const [searchResult, setSearchResult] = useState([]);
-  const welcome = useRef(null);
-  const searchEl = useRef(null);
-  var timer = 0;
-  // const attribute = useRef(null);
   useEffect(() => {
-    if (keyword) {
-      search(keyword);
-    }
-  }, [attribute]);
-
-  const searchDocs = (event) => {
-    clearTimeout(timer);
-    if (searchEl.current.classList[1] === "non-active") {
-      welcome.current.classList.toggle("non-active");
-      searchEl.current.classList.remove("non-active");
-    }
-    setKeyword(event.target.value);
-    timer = setTimeout(() => search(event.target.value), 250);
-  };
-
-  async function search(key) {
-    const params = {
-      key: key,
-      field: fieldTrans[attribute],
-    };
-    console.log("params: ", params);
-    try {
-      // Search document follow attribute
-      const response = await axios({
-        method: "get",
-        url: `${APP_API_URL}/docs/${userId}/search`,
-        params: params,
+    axios({
+      method: "get",
+      url: `${APP_API_URL}/docs/${user.id}/gen`,
+    })
+      .then((res) => {
+        if (!res.data) return;
+        res.data[0].size = parseInt(res.data[0].size);
+        res.data[0].amount = parseInt(res.data[0].amount);
+        setGenInfor(res.data[0]);
+        console.log(res.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      console.log("Search successful: ", response);
-      setSearchResult(response.data.hits.hits);
-    } catch {
-      alert("Error occured while search the documents");
-    }
-  }
+  }, []);
 
   return (
-    <div className="home">
+    <div className="upload-body">
       <div className="title content-header">Home</div>
-      <div className="home-header">
+      {/* <div className="home-header">
         <div className="row">
           <div className="col">
             <input
@@ -130,8 +103,8 @@ function Home(props) {
             </button>
           </div>
         </div>
-      </div>
-      <div className="home-body" style={{ textAlign: "center" }}>
+      </div> */}
+      {/* <div className="home-body" style={{ textAlign: "center" }}>
         <span className="text-header" ref={welcome}>
           Welcome to <br /> FCJ Document Management System{" "}
         </span>
@@ -175,8 +148,55 @@ function Home(props) {
             </div>
           </div>
         </div>
+      </div> */}
+
+      <div className="content-body">
+        <button
+          type="button"
+          className="btn btn-gray text-normal"
+          onClick={redirectPage}
+        >
+          <i className="fa-solid fa-upload icon-sm" aria-hidden="true"></i>
+          &nbsp;Upload
+        </button>
+        <div className="update-content">
+          <div className="infor-item">
+            <label className="title text-line">
+              Welcome <strong>{user.username}</strong> to FCJ Document
+              Management System
+            </label>
+            <br />
+          </div>
+          <div className="infor-item">
+            <label className="text-normal text-line text-black">
+              Used Storage
+            </label>
+            <br />
+            <span className="text-normal text-line">
+              {filesize(genInfor.size, { base: 1, standard: "jedec" })}
+            </span>
+          </div>
+          <div className="infor-item">
+            <label className="text-normal text-line text-black">
+              Amount of Files
+            </label>
+            <br />
+            <span className="text-normal text-line">
+              {genInfor.amount > 0 ? genInfor.amount + " files" : 0 + " file"}
+            </span>
+          </div>
+          <div className="infor-item">
+            <label className="text-normal text-line text-black">
+              For demonstration purposes, we only support:
+              <br />
+              <span className="text-gray">
+                - Max amount of files / 1 upload: <strong>80</strong>
+                <br />- Max size of a file: <strong>5 MB</strong>
+              </span>
+            </label>
+          </div>
+        </div>
       </div>
-      <div className="home-footer"></div>
     </div>
   );
 }

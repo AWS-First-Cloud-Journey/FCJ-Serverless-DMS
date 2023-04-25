@@ -42,7 +42,6 @@ input:focus {
   display: -webkit-flex;
   display: flex;
   align-items: center;
-  width: 50%
 }
 
 .check-input {
@@ -76,8 +75,6 @@ input:focus {
   border-top: 1px solid #7D7D7D;
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
-  margin-left: calc(var(--bs-gutter-x) * 0.5);
-  margin-right: calc(var(--bs-gutter-x) * 0.5);
 }
 
 .bleft {
@@ -107,13 +104,4 @@ input:focus {
 
 .non-active {
   display: none !important;
-}
-
-.down-icon {
-  font-size: 24px;
-  color: #F6F6F6
-}
-
-.down-icon:nth-child(odd) {
-  color: #a8a8a8
 }

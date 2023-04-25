@@ -8,11 +8,11 @@ import { ProgressBar } from "../../common/ProgressBar";
 import "./Upload.css";
 import { filesize } from "filesize";
 
-
 function Upload(props) {
-  const { user } = props;
+  const { user, genInfor, setGenInfor } = props;
   const [files, setFiles] = useState([]);
   const [fileData, setFileData] = useState([]);
+  // const [size, setSize] = useState([]);
   const [tags, setTags] = useState([""]);
   const [historyList, setHistoryList] = useState([]);
   // const [visibleUpload, setVisibleUpload] = useState(true);
@@ -22,7 +22,7 @@ function Upload(props) {
 
   const backPage = () => {
     navigate("/");
-  }
+  };
 
   const handleSelectFiles = (event) => {
     inputFile.current.value = "";
@@ -34,11 +34,12 @@ function Upload(props) {
   };
 
   const onChangeFiles = (event) => {
-    //setFiles(inputFiles)
     const inputFiles = event.target.files;
     const arrFiles = Array.from(inputFiles);
     let newFiles = [];
+    let newSize = [];
     console.log(inputFiles);
+
     arrFiles.map((file) => {
       let item = {};
       let folder = "";
@@ -46,73 +47,87 @@ function Upload(props) {
         if (file.webkitRelativePath) {
           folder = file.webkitRelativePath.replace(file.name, "");
         }
-        let fileSize = filesize(file.size, { base: 1, standard: "jedec" });
+        let fileType = file.name.split(".")[1];
+        // let fileSize = filesize(file.size, { base: 1, standard: "jedec" });
         item = {
           user_id: user.id,
           identityId: user.identityId,
           folder: folder,
           file: file.name,
-          type: file.type,
-          size: fileSize,
+          type: fileType,
+          size: file.size,
         };
         newFiles = [...newFiles, item];
+        newSize = [...newSize, file.size];
       }
     });
-    console.log(newFiles);
+
     setFiles([...newFiles, ...files]);
     setFileData([...arrFiles, ...fileData]);
-    // console.log(files);
+    // setSize([...size, ...newSize]);
   };
 
   const handleUploadFiles = async (event) => {
     event.preventDefault();
-    //let uploadZip =  jszip.file(
     if (fileData.length === 0) {
-      //setVisibleAlert(true);
       return;
-    } else {
-      let i,
-        progressBar = [];
+    }
+    let fileUpdateTag = files;
+    let totalSizeFile = genInfor.size;
+    let totalUploadedFiles = genInfor.amount;
+
+    if (tags.length !== 0) {
+      tags.map((tag, index) => {
+        let file = files[index];
+        file.tag = tag;
+        fileUpdateTag[index] = file;
+      });
+
+      setFiles(fileUpdateTag);
+    }
+
+    let i;
+    let progressBar = [];
+    try {
       for (i = 0; i < fileData.length; i++) {
         progressBar[0] = progressBarFactory(files[i]);
+
         await Storage.put(fileData[i].name, fileData[i], {
           progressCallback: progressBar[0],
           level: "protected",
-        }).then((result) => {
-          console.log(`Completed the upload of ${result.key}`);
-        }).catch((error) => {
-          console.log(error)
-          alert("Error occured while upload the documents");
-        });
-      }
+        })
 
-      let fileUpdateTag = [];
-      if (tags.length !== 0) {
-        tags.map((tag, index) => {
-          let file = files[index];
-          file.tag = tag;
-          fileUpdateTag[index] = file;
-        });
-
-        setFiles(fileUpdateTag);
-      }
-      let tempFiles = files;
-      setFiles([]);
-      try {
         // Write document information to DynamoDB
         const response = await axios({
           method: "post",
           url: `${APP_API_URL}/docs`,
-          data: tempFiles,
+          data: files[i],
         });
-        console.log("Upload successful");
-      } catch {
-        alert("Error Occured while upload the documents");
-      }
-    }
 
+        totalSizeFile += fileData[i].size;
+        totalUploadedFiles += 1;
+      }
+    } catch {
+      alert("Error occured while upload the documents");
+    } finally {
+      // Write general information to DynamoDB
+      const response = await axios({
+        method: "post",
+        url: `${APP_API_URL}/docs/${user.id}/gen`,
+        data: {
+          size: totalSizeFile,
+          amount: totalUploadedFiles
+        },
+      });
+    }
+    setFiles([]);
     // When you finish uploading, all items should be removed from the upload list
     setFileData([]);
+    // setSize([]);
+    setGenInfor({
+      size: totalSizeFile,
+      amount: totalUploadedFiles
+    })
     setTimeout(() => {
       setHistoryList([]);
     }, 3000);
@@ -218,23 +233,26 @@ function Upload(props) {
         &nbsp;
         <div className="upload-content">
           <div className="mt-4 pt-25">
-            <div className="row table-title text-normal text-black pt-70 pb-70">
-              <div className="col-3">Name</div>
-              <div className="col-3 bleft">Folder</div>
-              <div className="col-2 bleft">Size</div>
-              <div className="col bleft">Tag</div>
+            <div className="table-title">
+              <div className="row-custome text-normal text-black pt-70 pb-70">
+                <div className="col-3">Name</div>
+                <div className="col-3 bleft">Folder</div>
+                <div className="col-2 bleft">Size</div>
+                <div className="col bleft">Tag</div>
+              </div>
             </div>
+
             <div className="document-table">
               {files.length !== 0 &&
                 files.map((file, index) => {
                   return (
                     <div
-                      className="row table-body text-normal pt-25 pb-25 mt-2"
+                      className="row-custome table-body text-normal pt-25 pb-25 mt-2"
                       key={index}
                     >
                       <div className="col-3 hidden-long">{file.file}</div>
                       <div className="col-3 hidden-long">{file.folder}</div>
-                      <div className="col-2">{file.size}</div>
+                      <div className="col-2">{filesize(file.size, { base: 1, standard: "jedec" })}</div>
                       <div className="col">
                         <input
                           type="text"
@@ -250,7 +268,11 @@ function Upload(props) {
         </div>
       </div>
       <div className="content-footer">
-        <button type="button" className="btn btn-cancel text-normal" onClick={backPage}>
+        <button
+          type="button"
+          className="btn btn-cancel text-normal"
+          onClick={backPage}
+        >
           Cancel
         </button>
         &nbsp;&nbsp;
