@@ -2,7 +2,7 @@
 import { Storage } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
 
-export const APP_API_URL = "https://jngn0rrark.execute-api.ap-southeast-1.amazonaws.com/dev";
+export const APP_API_URL = "https://d4vdxavlfh.execute-api.ap-southeast-1.amazonaws.com/dev";
 export const DEFAULT_REGION = "ap-southeast-1";
 
 

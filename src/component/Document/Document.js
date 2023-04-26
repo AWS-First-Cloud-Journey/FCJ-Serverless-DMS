@@ -4,6 +4,7 @@ import axios from "axios";
 import { Storage } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
 import DocumentTable from "./DocumentTable";
+import SearchResultTable from "./SearchResultTable";
 
 // import "./MyProfile.css";
 
@@ -159,7 +160,7 @@ function Document(props) {
       url: `${APP_API_URL}/docs/${user.id}/gen`,
       data: {
         size: totalSizeFile,
-        amount: totalUploadedFiles
+        amount: totalUploadedFiles,
       },
     });
 
@@ -167,7 +168,7 @@ function Document(props) {
     setMod(2);
     setGenInfor({
       size: totalSizeFile,
-      amount: totalUploadedFiles
+      amount: totalUploadedFiles,
     });
     loadDocs();
   };
@@ -282,14 +283,14 @@ function Document(props) {
           ></DocumentTable>
         )}
         {keyword && (
-          <DocumentTable
+          <SearchResultTable
             data={searchResult}
             user={user}
             mod={mod}
             message="Files not found"
             checkedDoc={checkedDoc}
             navigateToDetailPage={navigateToDetailPage}
-          ></DocumentTable>
+          ></SearchResultTable>
         )}
 
         {/* <div className="pt-3">
